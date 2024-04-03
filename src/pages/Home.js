@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addUser } from '../features/users';
+import { addUser, deleteUser } from '../features/users';
 
 export const Home = () => {
   const [name, setName] = useState('');
@@ -42,6 +42,19 @@ export const Home = () => {
             <div key={user.id}>
               <h1>{user.name}</h1>
               <h2>{user.username}</h2>
+              <input
+                type="text"
+                placeholder="new username"
+                onChange={(event) => setUsername(event.target.value)}
+              />
+              <button>Update username</button>
+              <button
+                onClick={() => {
+                  dispatch(deleteUser({ id: user.id }));
+                }}
+              >
+                Delete user
+              </button>
             </div>
           );
         })}
